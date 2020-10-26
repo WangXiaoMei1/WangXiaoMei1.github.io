@@ -2,16 +2,16 @@
     <div class="container no-gutter">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Projects</h2>
+                <h2 class="section-heading">Selected Projects</h2>
                 <hr class="primary">
             </div>
         </div>
         <div class="row ">
             <blockquote class="h4 text-left">
-                <a href="blog"">Automatic Accompaniment</a>
+                <a href="project-auto_arrangement">Algorithm Arrangement via Search and Style Transfer</a>
             </blockquote>
             <div class="col-sm-4">
-                <a href="blog" class="portfolio-box">
+                <a href="project-auto_arrangement" class="portfolio-box">
                     <img src="img/portfolio/1.jpg" class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
@@ -19,18 +19,26 @@
                                 Category
                             </div>
                             <div class="project-name">
-                                Try
+                                Algorithm Arrangement
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-sm-8">
-                <a href="blog" class="portfolio-box">
-                    <p class='text-justify'>
-                        
-                    </p>
-                </a>
+            <div class="col-sm-8">                
+                <ul class="list-inline" >
+                    <ul class='text-justify'>
+                        <li><p> For a piece of melody query <em>Q<sub>M</sub></em>, we search for ideal target melody <em>T<sub>M</sub></em> through both latent-represented and rule-based criterion, and conduct arrangement by assigning <em>T<sub>M</sub></em>'s accompaniment track <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em>. </p></li>
+                        <!--
+                        <li>Disentangle <em>T<sub>A</sub></em>'s latent representation into texture <em>Z<sub>t</sub></em> and chord <em>Z<sub>c</sub></em>, manipulate <em>Z<sub>c</sub></em> with <em>Q<sub>M</sub></em>'s chord progression, and regenerate <em>T<sub>A</sub></em> to maintain better consonance with <em> Q<sub>M</sub> </em> </li>
+
+                        <li>Devised a search methodology based on phrase-level similarity matching of rhythm and chord function progression to select best <em>T<sub>A</sub></em> candidates</li>
+                        -->
+
+                        <li><p>This project is a joint application of <a href="https://arxiv.org/abs/1906.03626" class="text-white bg-dark"><em>EC<sup>2</sup>-VAE</em></a>, <a href="https://arxiv.org/abs/2008.07122" class="text-white bg-dark"><em>Poly-Disentanglement-VAE</em></a>, and <a href="https://arxiv.org/abs/2008.07142" class="text-white bg-dark"><em>POP-909 Dataset</em></a>, three ISMIR works from <a href="http://www.musicxlab.com/#/" class="text-white bg-dark">Music X Lab</a>, NYU Shanghai.</p></li>
+
+                    </ul>
+                </ul>
             </div>
         </div>
 
@@ -38,10 +46,10 @@
         
         <div class="row">
             <blockquote class="h4 text-left">
-                <a href="blog"">Dance Generation and Control of Humanoid Robot Over Online Music</a>
+                <a href="project-dancing_robot">Real-Time Music-Driven Dance Generation for Humanoid Robot</a>
             </blockquote>
             <div class="col-sm-4">
-                <a href="blog" class="portfolio-box">
+                <a href="project-dancing_robot" class="portfolio-box">
                     <img src="img/portfolio/2.jpg" class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
@@ -56,20 +64,13 @@
                 </a>
             </div>
             <div class="col-sm-8">                
-                    <p class='text-justify'> 
-                        <ul class="list-inline">
-                            <ul>
-                                <li>In this project, we extract 3D pose of solo dancers from dance videos we collected from the internet and cut them into primitive units w.r.t. the beat sequence of its background music;</li>
-                                <li>We generate improvisational dance with unit selection methodology based on two criterion:
-                                <ul>
-                                    <li>Symantic relevance of dance units;</li>
-                                    <li>Stability of the robot when it transitions from one unit to another.</li>
-                                </ul>
-                                </li>
-                                <li>The chosen units are mapped to Nao's joint space and a PID controller is applied to synchronize Nao's dance with online music stimulation.</li>
-                            </ul>
-                        </ul>
-                    </p>  
+                <ul class="list-inline">
+                    <ul class='text-justify'>
+                        <li><p>This project aims to execute robot dance without hard coding, and we propose to generate improvisational dance sequence with Unit Selection Methodology based on two criterion: <em>semantic relevance of dance units</em>, and <em>unit transition stability of the robot</em></p></li>
+
+                        <li><p>To render real-time performance, we apply <em>Madmom</em> for beat tracking and synchronize our dance to the music through a feedback loop with <em>PID</em> control</p></li>
+                    </ul>
+                </ul>
             </div>
         </div>
 
@@ -77,10 +78,10 @@
 
         <div class="row">
             <blockquote class="h4 text-left">
-                <a href="blog"">Look&Listen: Mutual Attention between Visual and Auditory Sensory</a>
+                <a href="project-visual_auditory">Video Action Recognition via Visual and Auditory Clues</a>
             </blockquote>
             <div class="col-sm-4">
-                <a href="blog" class="portfolio-box">
+                <a href="project-visual_auditory" class="portfolio-box">
                     <img src="img/portfolio/3.jpg" class="img-responsive" alt="">
                     <div class="portfolio-box-caption">
                         <div class="portfolio-box-caption-content">
@@ -96,17 +97,44 @@
             </div>
 
             <div class="col-sm-8">
-                    <p class='text-justify'>
-                        <ul class="list-inline">
-                            <ul>
-                                <li>We focus on mining the inter-relationship between the audio flow and the image flow of videos, and test the capability of our model on the Video Action Recognition task;</li>
-                                <li>For each sample of image frame, we sample the 1s audio clip centered by the image and apply STFT to obtain the Mel-spectrogram;</li>
-                                <li>We model the relationship between the image flow and the audio flow (in Mel-spectrom) with scaled dot-production attention, the result of which is processed with Psedo-3D network for classification</li>
-                                <li>Higher classification accuracy is expected.</li>
-                            </ul>
-                        </ul>
-                    </p>
-                
+                <ul class="list-inline">
+                    <ul class='text-justify'>
+                        <li><p>Video Action Recognition is a popular computer vision task usually conducted exclusively on the image stream of the video. This project aims to explore the soundtrack and fuse the visual and auditory information for better recognition accuracy</p></li>
+                        <li><p>To reveal the inter-dependency between visual scene and sound in the video, we apply <em>scaled dot-product attention</em> as an early fusion methodology.
+                    </ul>
+                </ul>     
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="row">
+            <blockquote class="h4 text-left">
+                <a href="project-visual_auditory">Sound Frequency Analysis for Tightness Detection</a>
+            </blockquote>
+            <div class="col-sm-4">
+                <a href="project-visual_auditory" class="portfolio-box">
+                    <img src="img/portfolio/7.jpg" class="img-responsive" alt="">
+                    <div class="portfolio-box-caption">
+                        <div class="portfolio-box-caption-content">
+                            <div class="project-category text-faded">
+                                Project
+                            </div>
+                            <div class="project-name">
+                                Sound Frequency
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-8">
+                <ul class="list-inline">
+                    <ul class='text-justify'>
+                        <li><p>For the large-scale electricity generator set, tightness of the <em>slot wedge</em> (part of the generator) is critical to its functioning, but hard to directly detect. Hence we propose a method through tapping at the wedge wall and analyzing the sound frequency.</p></li>
+                        <li><p>By feeding the <em>MFCC</em> and <em>log-energy</em> of the waveform to a <em>KNN</em> classifier we gained an detection accuracy of 99.45% on the test set.
+                    </ul>
+                </ul>     
             </div>
         </div>
         <p></p>
