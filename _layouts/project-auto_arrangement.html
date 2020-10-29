@@ -4,7 +4,7 @@
 {% include head.html %}
 
 <body id="page-top">
-  {% include nav.html %}
+  {% include nav_sub.html %}
   <section class="bg-white" id="">
       <div class="container no-gutter">
         <div class="row"><p class="h1"></p></div>
@@ -21,16 +21,20 @@
             <p class="h3">Motivation</p>
 
             <p class='text-justify'>
-              If you ask a piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: "I'm not arranging it myself. I'm just borrowing from Rahmaninov!" In many cases like this, musicians derive such improvisational arrangement by retrieving proper piano pieces he/her has mastered before, and then playing it with perhaps only tiny modification. Hence we wonder, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her head), then can we generate pleasing arrangement for a melody query by searching for proper target arrangements from the dataset? This will come to an automatic arrangement system, which can be further applied on line, rendering amzing experience with improvizational automatic accompaniment.
+              If you ask a professional piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: "I'm not arranging it myself. I'm just borrowing from Rahmaninov!" In many cases like this, musicians derive such improvisational arrangement not from scratch, but by retrieving proper piano pieces he/her has mastered before, and playing it with some tiny modification. Hence we propose, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her head), then we can generate pleasing arrangement for a melody query by searching for arrangement candidates from the dataset. This can be further developed to an automatic accompaniment system, which can be applied on line, rendering amazing experience with real-time improvizational accompaniment generation.
             </p>
 
             <p class="h3">Approach</p>
 
             <p class='text-justify'>
-              Our search scheme is shown in the figure below. First of all, we need a dataset composed of melody-accompaniment pairs. For a melody query <em>Q<sub>M</sub></em>, we first search for the melody target <em>T<sub>M</sub></em> which is most "similar"to <em>Q<sub>M</sub></em> from the dataset. The criterion of "similarity", which we refer to as our <em>Search Strategy</em>, is rule-based. When we have <em>T<sub>M</sub></em>, we just need to assign <em>T<sub>M</sub></em>'s accompaniment <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em> and the arrangement is done. 
+              Our search scheme is shown in the figure below. First of all, we need a dataset composed of melody-accompaniment pairs. For a melody query <em>Q<sub>M</sub></em>, we first search for the melody target <em>T<sub>M</sub></em> which is most "similar"to <em>Q<sub>M</sub></em> from the dataset. The criterion of "similarity", which we refer to as our <em>Search Strategy</em>, is rule-based. When we have <em>T<sub>M</sub></em>, we retrieve it's accompaniment <em>T<sub>A</sub></em> and manipulate <em>T<sub>A</sub></em>'s chord in latent space to maintain consonance with <em>Q<sub>M</sub></em
+               to <em>Q<sub>M</sub></em> and the arrangement is done. 
             </p>
 
-            <p class='text-justify'>Is it really that simple? In fact, if we arrange for a small music segment (e.g., two bars), it is okey to directly assign <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em> when we have a dataset which is big enough. However, when we turn to longer pieces (e.g., eight-bar phrases), it will be hard to find perfectly matched targets and the assignment will be inproper. In fact direct assignment is not what exactly a real improvisor would do either, and modification is always necessary for better consonance. Therefore, we manage to munipulate <em>T<sub>A</sub></em>'s chord in the latent space by substituting its latent code with that from <em>Q<sub>M</sub></em>'s true chord. Such latent manipulation is realized by feeding <em>T<sub>A</sub></em> to Poly-Disentanglement VAE, disentangle the latent codes into <em>Z<sub>txt</sub></em> (for texture) and <em>Z<sub>chd</sub></em> (for chord), and regenerate <em>T<sub>A</sub><sup>'</sup></em> with <em>Q<sub>M</sub></em>'s <em>Z<sub>chd</sub><sup>'</sup></em>. 
+            
+
+
+            <p class='text-justify'>Is it really that simple? In fact, if we arrange accompaniment for a tiny music segment (e.g., two bars), it is okey to directly assign <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em> when we have a dataset which is big enough. However, melody query is long (e.g., eight-bar phrases), it will be hard to find perfectly matched targets and the assignment will be inproper. In fact direct assignment is not what exactly a real improvisor would do either, and modification is always necessary for better consonance. Therefore, we manage to munipulate <em>T<sub>A</sub></em>'s chord in the latent space by substituting its latent code with that from <em>Q<sub>M</sub></em>'s true chord. Such latent manipulation is realized by feeding <em>T<sub>A</sub></em> to Poly-Disentanglement VAE, disentangle the latent codes into <em>Z<sub>txt</sub></em> (for texture) and <em>Z<sub>chd</sub></em> (for chord), and regenerate <em>T<sub>A</sub><sup>'</sup></em> with <em>Q<sub>M</sub></em>'s <em>Z<sub>chd</sub><sup>'</sup></em>. 
             </p>
 
             <img src="img/portfolio/autoarr/diagram.jpg" class="img-responsive center-block img-rounded" alt="">
