@@ -5,7 +5,7 @@
 
 <body id="page-top">
   {% include nav_sub.html %}
-  <section class="bg-white" id="">
+  <section class="bg-warning" id="">
       <div class="container no-gutter">
         <div class="row"><p class="h1"></p></div>
         <div class="row"><p class="h1"></p></div>
@@ -21,151 +21,153 @@
             <p class="h3">Motivation</p>
 
             <p class='text-justify'>
-              If you ask a professional piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: "I'm not arranging it myself. I'm just borrowing from Rahmaninov!" In many cases like this, musicians derive such improvisational arrangement not from scratch, but by retrieving proper piano pieces he/her has mastered before, and playing it with some tiny modification. Hence we propose, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her head), then we can generate pleasing arrangement for a melody query by searching for arrangement candidates from the dataset. This can be further developed to an automatic accompaniment system, which can be applied on line, rendering amazing experience with real-time improvizational accompaniment generation.
+              If you ask a professional piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: "I'm not arranging it myself. I'm just borrowing from Rahmaninov!" In many cases like this, musicians make improvisational accompaniment not from scratch, but by retrieving similar piano pieces they have mastered before, and playing the pieces with proper harmonic modification. Hence we propose, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her brain), and a style transfer model which can finely modify a polyphonic input's harmonic structure, then we can generate high-quality arrangement for any melody query simply by search and style transfer. This can be further developed to, say, an automatic accompaniment system, which can be applied on line, rendering amazing experience with real-time improvizational accompaniment generation.
             </p>
 
             <p class="h3">Approach</p>
 
             <p class='text-justify'>
-              Our search scheme is shown in the figure below. First of all, we need a dataset composed of melody-accompaniment pairs. For a melody query <em>Q<sub>M</sub></em>, we first search for the melody target <em>T<sub>M</sub></em> which is most "similar"to <em>Q<sub>M</sub></em> from the dataset. The criterion of "similarity", which we refer to as our <em>Search Strategy</em>, is rule-based. When we have <em>T<sub>M</sub></em>, we retrieve it's accompaniment <em>T<sub>A</sub></em> and manipulate <em>T<sub>A</sub></em>'s chord in latent space to maintain consonance with <em>Q<sub>M</sub></em
-               to <em>Q<sub>M</sub></em> and the arrangement is done. 
+              We exploit the POP-909 Dataset for our work. POP-909 contains multiple versions of piano arrangements of 909 popular songs created by professional musicians. We process each song to acquire a library of melody-arrangement pairs, which well aids our purpose for target searching (more details later). We additionally utilize the phrase tags and segment each song into complete phrases. This helps maintain better rhythmic structure for our arrangement results.
+            </p>
+              
+            <p class='text-justify'>
+              We further extend the use of Poly-Disentanglement VAE to conduct harmonic modification. For a piece of polyphonic arrangement, we believe its chord progression and texture are two style attributes, which can be abstracted, disentangled, and exchanged. Poly-Disentanglement VAE is right for this purpose. Harmonic modification is essentially to substitute the chord attribute of the search result with that of the lead melody. We apply Poly-Disentanglement to realize this kind of style trasfer in the latent space.
+            </p>
+              
+            <p class='text-justify'>
+              The overall scheme of our work is shown in the following figure. Poly-Disentanglement VAE is powerful, but we can not rely solely on it because we must also control the rhthmic structure. Therefore we device and test a series of rule-based criteria to make sure the searched accompaniment candidates are ideal. The search strategy will be discusssed in the following.
             </p>
 
-            
+            <div class="row text-center">
+              <img src="img/portfolio/autoarr/diagram.png" style="width: 800px; height: auto ">
+            </div>
 
-
-            <p class='text-justify'>Is it really that simple? In fact, if we arrange accompaniment for a tiny music segment (e.g., two bars), it is okey to directly assign <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em> when we have a dataset which is big enough. However, melody query is long (e.g., eight-bar phrases), it will be hard to find perfectly matched targets and the assignment will be inproper. In fact direct assignment is not what exactly a real improvisor would do either, and modification is always necessary for better consonance. Therefore, we manage to munipulate <em>T<sub>A</sub></em>'s chord in the latent space by substituting its latent code with that from <em>Q<sub>M</sub></em>'s true chord. Such latent manipulation is realized by feeding <em>T<sub>A</sub></em> to Poly-Disentanglement VAE, disentangle the latent codes into <em>Z<sub>txt</sub></em> (for texture) and <em>Z<sub>chd</sub></em> (for chord), and regenerate <em>T<sub>A</sub><sup>'</sup></em> with <em>Q<sub>M</sub></em>'s <em>Z<sub>chd</sub><sup>'</sup></em>. 
-            </p>
-
-            <img src="img/portfolio/autoarr/diagram.jpg" class="img-responsive center-block img-rounded" alt="">
+            <p class="h3">Search Strategy</p>
 
             <p class='text-justify'>
-            With both rule-based search strategy for locating <em>T<sub>A</sub></em> candidates, and latent manipulation for better consonant <em>T<sub>A</sub><sup>'</sup></em>, we have been able to generate arrangement for music phrases as long as eight bars.
+              We currently conduct search on the phrase level (8 bars at most of the time). For a melody query <em>Q<sub>M</sub></em>, instead of searching for accompaniment targets directly, we first search for the melody target <em>T<sub>M</sub></em> which is most "similar" to <em>Q<sub>M</sub></em> from POP-909. Our intuition is that, if <em>T<sub>M</sub></em> and <em>Q<sub>M</sub></em> are similar in structures (i.e., progression of chord function, rhythm pattern, etc.), then <em>T<sub>M</sub></em>'s accompaniment will fit <em>Q<sub>M</sub></em> in rhythmic structure as well. Thanks to POP-909 which neatly aligns melody and accompaniment tracks in consistent order. When we have <em>T<sub>M</sub></em>, we retrieve its accompaniment counterpart <em>T<sub>A</sub></em> and manipulate <em>T<sub>A</sub></em>'s chord in the latent space for style transfer. 
             </p>
 
-            <p class="h3">Baseline Method 1: Direct Assignment</p>
+            <p class='text-justify'>
+            With both rule-based search strategy for locating proper candidate <em>T<sub>A</sub></em>, and style transfer for harmonic manipulation, we can generate surprisingly natural and pleasing arrangement for music phrases as long as eight bars. The following demos elaborate the performance of our framework, and we will keep going for generating arrangement on the level of whole score!
+            </p>
 
-                <div class="row"><p class="h1"></p></div>
-                <div class="col-sm-4 text-center">
+            <p class="h3">Demos and Ablation Study</p>
+            
+            <p class='text-justify'>
+              In this part we arrange accompaniment for the song Boy Boggy from Nottingham Dataset. This song has two phrases (16 bars) and our method searches for each phrase and concatenate the targets together. Our method is based on the rule-base search strategy and style transfer. We first do an ablation study on each of these two components, and then display our final results of the full model. Now, let's first listen to the lead melody.
+            </p>
+
+                <div class="text-center">
                   <audio controls>
                     <source src="audio/algarr/leedSheet.ogg" type="audio/ogg" />
                     <source src="audio/algarr/leedSheet.mp3" type="audio/mpeg" />
                     <a href="audio/algarr/leedSheet.mp3">query</a>
                   </audio>
-                  <p class="no-gutter">Melody Query</p>
+                  <p class="h5">Lead Melody Query</p>
                 </div>
+            
+            <div class="row"><p class="h1"></p></div>
+            <p class="h4 text-center">Search Strategy without Style Transfer</p>
+            
+            <p class='text-justify'>
+            If we rely solely on the Rule-Based Search Strategy, the search targets are unlikely to perfect match the melody in harmony. Truncating the search length, e.g., to 2 bars can partly relieve the problem, since it is easier to match 2 bars. However, it will introduce unacceptable structure inconsistency in the longer range. The following demos illustrate this. The arrangement is generated by concatenating 2-bar pieces searched from the dataset without any further manipulation. The result sounds okay within each piece, but not so on the whole range.
+            </p>
 
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-6 text-center">
                   <audio controls>
                     <source src="audio/algarr/baseline_bar.ogg" type="audio/ogg" />
                     <source src="audio/algarr/baseline_bar.mp3" type="audio/mpeg" />
                     <a href="audio/algarr/baseline_bar.mp3">arr_bar-level</a>
                   </audio>
-                  <p>Arrangement</p>
+                  <p class="h5">Result (Baseline 1)</p>
                 </div>
 
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-6 text-center">
                   <audio controls>
                     <source src="audio/algarr/baseline_bar_ref.ogg" type="audio/ogg" />
                     <source src="audio/algarr/baseline_bar_ref.mp3" type="audio/mpeg" />
                     <a href="audio/algarr/baseline_bar_ref.mp3">target_bar-level</a>
                   </audio>
-                  <p>Searched Targets</p>
+                  <p class="h5">Search Reference (Concatenation of 2-Bar Pieces)</p>
                 </div>
 
-            <p class="h3">Baseline Method 2: Latent Manipulation under Random Search</p>
+            <div class="row"><p class="h1"></p></div>
+            <p class="h4 text-center">Style Transfer without Search Strategy</p>
 
-                <div class="row"><p class="h1"></p></div>
-                <div class="col-sm-4 text-center">
-                  <audio controls>
-                    <source src="audio/algarr/leedSheet.ogg" type="audio/ogg" />
-                    <source src="audio/algarr/leedSheet.mp3" type="audio/mpeg" />
-                    <a href="audio/algarr/leedSheet.mp3">query</a>
-                  </audio>
-                  <p class="no-gutter">Melody Query</p>
-                </div>
+            <p class='text-justify'>
+              Style transfer can not settle everything on its own either. On the one hand, if accompaniment target <em>T<sub>A</sub></em>'s original chord varies too much from the lead chord, the manipulated results could be unsatisfactory. In fact the harmony is somewhat "colapsed" in this case and sounds rather insipid. On the other hand, the texture of <em>T<sub>A</sub></em> can be totally unmatched with the melody's rhythm. The following demo illustrates both two cases. Its first half is an insipid result, and second an unmatched one.
+            </p>       
 
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-6 text-center">
                   <audio controls>
                     <source src="audio/algarr/baseline_random.ogg" type="audio/ogg" />
                     <source src="audio/algarr/baseline_random.mp3" type="audio/mpeg" />
                     <a href="audio/algarr/baseline_random.mp3">arr_phrase_random_search</a>
                   </audio>
-                  <p>Arrangement</p>
+                  <p class="h5">Result (Baseline 2)</p>
                 </div>
     
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-6 text-center">
                   <audio controls>
                     <source src="audio/algarr/baseline_random_ref.ogg" type="audio/ogg" />
                     <source src="audio/algarr/baseline_random_ref.mp3" type="audio/mpeg" />
                     <a href="audio/algarr/baseline_random_ref.mp3">target_phrase_random_search</a>
                   </audio>
-                  <p>Searched Targets</p>
+                  <p class="h5">Search Reference</p>
                 </div>
 
-              <p class="h3">Baseline Method 3: Latent Manipulation under Rule-Based Search Strategy</p>
+              <div class="row"><p class="h1"></p></div>
+              <p class="h4 text-center">Search AND Style Transfer</p>
+              
+              <p class='text-justify'>
+                The following demo is generated by our complete framework. The accompaniment target is firstly searched by the ranking of the rule-based criterion, and then style-transfered with lead target chord in the latent space. You will find the arrangement fits the melody well both in harmonic and rhythmic structure. Please enjoy!
+              </p>
 
-                  <div class="row"><p class="h1"></p></div>
-                  <div class="col-sm-4 text-center">
-                    <audio controls>
-                      <source src="audio/algarr/leedSheet.ogg" type="audio/ogg" />
-                      <source src="audio/algarr/leedSheet.mp3" type="audio/mpeg" />
-                      <a href="audio/algarr/leedSheet.mp3">melody</a>
-                    </audio>
-                    <p class="no-gutter">Melody Query</p>
-                  </div>
-
-                  <div class="col-sm-4 text-center">
+                  <div class="col-sm-6 text-center">
                     <audio controls>
                       <source src="audio/algarr/new_1.ogg" type="audio/ogg" />
                       <source src="audio/algarr/new_1.mp3" type="audio/mpeg" />
                       <a href="audio/algarr/new_1.mp3">arr1_phrase_rule-based_search</a>
                     </audio>
-                    <p>Arrangement</p>
+                    <p class="h5">Result 1 (Proposed Method)</p>
                   </div>
       
-                  <div class="col-sm-4 text-center">
+                  <div class="col-sm-6 text-center">
                     <audio controls>
                       <source src="audio/algarr/new_1_ref.ogg" type="audio/ogg" />
                       <source src="audio/algarr/new_1_ref.mp3" type="audio/mpeg" />
                       <a href="audio/algarr/new_1_ref.mp3">target1_phrase_rule-based_search</a>
                     </audio>
-                    <p>Searched Targets</p>
+                    <p class="h5">Search Reference</p>
                   </div>
 
+                <p class='text-justify'>
+                  Below is another demo derived from our arrangement framework on the same song. It sounds natural and pleasing, with a totally different style from the first piece. This illustrates our framework's ability to generate style-varying arrangements.
+                </p>                
 
-
-                  <div class="row"><p class="h1"></p></div>
-                  <div class="col-sm-4 text-center">
-                    <audio controls>
-                      <source src="audio/algarr/leedSheet.ogg" type="audio/ogg" />
-                      <source src="audio/algarr/leedSheet.mp3" type="audio/mpeg" />
-                      <a href="audio/algarr/leedSheet.mp3">query</a>
-                    </audio>
-                    <p class="no-gutter">Melody Query</p>
-                  </div>
-
-                  <div class="col-sm-4 text-center">
+                  <div class="col-sm-6 text-center">
                     <audio controls>
                       <source src="audio/algarr/new_2.ogg" type="audio/ogg" />
                       <source src="audio/algarr/new_2.mp3" type="audio/mpeg" />
                       <a href="audio/algarr/new_1.mp3">arr2_phrase_rule-based_search</a>
                     </audio>
-                    <p>Arrangement</p>
+                    <p class="h5">Result 2 (Proposed Method)</p>
                   </div>
       
-                  <div class="col-sm-4 text-center">
+                  <div class="col-sm-6 text-center">
                     <audio controls>
                       <source src="audio/algarr/new_2_ref.ogg" type="audio/ogg" />
                       <source src="audio/algarr/new_2_ref.mp3" type="audio/mpeg" />
                       <a href="audio/algarr/new_2_ref.mp3">target2_phrase_rule-based_search</a>
                     </audio>
-                    <p>Searched Targets</p>
+                    <p class="h5">Search Reference</p>
                   </div>
         
           
                 
           </div>
+          
 
           
       </div>
