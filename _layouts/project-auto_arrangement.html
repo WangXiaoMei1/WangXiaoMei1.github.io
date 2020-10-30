@@ -21,17 +21,17 @@
             <p class="h3">Motivation</p>
 
             <p class='text-justify'>
-              If you ask a professional piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: "I'm not arranging it myself. I'm just borrowing from Rahmaninov!" In many cases like this, musicians make improvisational accompaniment not from scratch, but by retrieving similar piano pieces they have mastered before, and playing the pieces with proper harmonic modification. Hence we propose, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her brain), and a style transfer model which can finely modify a polyphonic input's harmonic structure, then we can generate high-quality arrangement for any melody query simply by search and style transfer. This can be further developed to, say, an automatic accompaniment system, which can be applied on line, rendering amazing experience with real-time improvizational accompaniment generation.
+              If you ask a professional piano improvisor how he can arrange an accompaniment for a song instantly, he/she may well tell you: <em>"I'm not arranging it myself. I'm just borrowing from Rahmaninov!</em>" In many cases like this, musicians make improvisational accompaniment not from scratch, but by retrieving similar piano pieces they have mastered before, and playing the pieces with proper harmonic modification. Hence we propose, if we acquire a large dataset of music corpus (just as what the improvisor does in his/her brain), and a style transfer model which can finely modify a polyphonic input's harmonic structure, then we can generate high-quality arrangement for any lead melody simply by search and style transfer. This can be further developed to, say, an automatic accompaniment system, which can be applied on line, rendering amazing experience with real-time improvizational accompaniment generation.
             </p>
 
             <p class="h3">Approach</p>
 
             <p class='text-justify'>
-              We exploit the POP-909 Dataset for our work. POP-909 contains multiple versions of piano arrangements of 909 popular songs created by professional musicians. We process each song to acquire a library of melody-arrangement pairs, which well aids our purpose for target searching (more details later). We additionally utilize the phrase tags and segment each song into complete phrases. This helps maintain better rhythmic structure for our arrangement results.
+              We exploit the <a href="https://arxiv.org/abs/2008.07142"><em>POP-909 Dataset</em></a> for our work. POP-909 contains multiple versions of piano arrangements of 909 popular songs created by professional musicians. We process each song to acquire a library of melody-arrangement pairs, which well aids our purpose for target searching (more details later). We additionally utilize the phrase tags and segment each song into complete phrases. This helps maintain better rhythmic structure for our arrangement results.
             </p>
               
             <p class='text-justify'>
-              We further extend the use of Poly-Disentanglement VAE to conduct harmonic modification. For a piece of polyphonic arrangement, we believe its chord progression and texture are two style attributes, which can be abstracted, disentangled, and exchanged. Poly-Disentanglement VAE is right for this purpose. Harmonic modification is essentially to substitute the chord attribute of the search result with that of the lead melody. We apply Poly-Disentanglement to realize this kind of style trasfer in the latent space.
+              We further extend the use of <a href="https://arxiv.org/abs/2008.07122" ><em>Poly-Disentanglement-VAE</em></a> to conduct harmonic modification. For a piece of polyphonic arrangement, we believe its chord progression and texture are two style attributes, which can be abstracted, disentangled, and exchanged. Poly-Disentanglement VAE is right for this purpose. Harmonic modification is essentially to substitute the chord attribute of the search result with that of the lead melody. We apply Poly-Disentanglement to realize this kind of style trasfer in the latent space.
             </p>
               
             <p class='text-justify'>
@@ -162,14 +162,8 @@
                       <a href="audio/algarr/new_2_ref.mp3">target2_phrase_rule-based_search</a>
                     </audio>
                     <p class="h5">Search Reference</p>
-                  </div>
-        
-          
-                
+                  </div>  
           </div>
-          
-
-          
       </div>
 </section>
 {% include scripts.html %}
