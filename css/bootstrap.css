@@ -1338,6 +1338,12 @@ a.text-primary:hover {
 a.text-success:hover {
   color: #2b542c;
 }
+.text-dark {
+  color: #111111;
+}
+a.text-dark:hover {
+  color: #111111;
+}
 .text-info {
   color: #31708f;
 }
