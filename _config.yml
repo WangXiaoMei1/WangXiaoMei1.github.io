@@ -1,7 +1,7 @@
 # Site settings
 title: "Jingwei Zhao"
-email: "zhaojw@sjtu.edu.cn"
-email2: "jingwei.zhao@nyu.edu"
+email: "jz4807@nyu.edu"
+email2: "zhaojw@sjtu.edu.cn"
 description: > # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "" # the base hostname & protocol for your site
