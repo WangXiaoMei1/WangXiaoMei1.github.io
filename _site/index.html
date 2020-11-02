@@ -155,9 +155,11 @@
             <div class="col-sm-8">                
                 <ul class="list-inline" >
                     <ul class='text-justify'>
-                        <li><p> For a piece of melody query <em>Q<sub>M</sub></em>, we search for ideal target melody <em>T<sub>M</sub></em> through both latent-represented and rule-based criterion, and conduct arrangement by assigning <em>T<sub>M</sub></em>'s accompaniment track <em>T<sub>A</sub></em> to <em>Q<sub>M</sub></em>. </p></li>
+                        <li><p> Arrangement generation for lead melodies is an interesting topic in computer music, and conventional methods are rely on sequential models. Here, we propose a novel framework based on rule-based search strategies and style transfer in the disentangled latent space.  </p></li>
 
-                        <li><p>This project is a joint application of <a href="https://arxiv.org/abs/1906.03626" class="text-white bg-dark"><em>EC<sup>2</sup>-VAE</em></a>, <a href="https://arxiv.org/abs/2008.07122" class="text-white bg-dark"><em>Poly-Disentanglement-VAE</em></a>, and <a href="https://arxiv.org/abs/2008.07142" class="text-white bg-dark"><em>POP-909 Dataset</em></a>, three ISMIR works from <a href="http://www.musicxlab.com/#/" class="text-white bg-dark">Music X Lab</a>, NYU Shanghai.</p></li>
+                        <li><p>This project is a joint application of <a href="https://arxiv.org/abs/1906.03626" class="text-white bg-dark">EC<sup>2</sup>-VAE</a>, <a href="https://arxiv.org/abs/2008.07122" class="text-white bg-dark">Poly-Disentanglement-VAE</a>, and <a href="https://arxiv.org/abs/2008.07142" class="text-white bg-dark">POP-909 Dataset</a>, three ISMIR works from <a href="http://www.musicxlab.com/#/" class="text-white bg-dark">Music X Lab</a>, NYU Shanghai.</p></li>
+
+                        <li><p><a href="project-auto_arrangement" class="text-white bg-dark">Demo Page</a></p></li>
 
                     </ul>
                 </ul>
@@ -188,9 +190,11 @@
             <div class="col-sm-8">                
                 <ul class="list-inline">
                     <ul class='text-justify'>
-                        <li><p>This project aims to execute robot dance without hard coding, and we propose to generate improvisational dance sequence with Unit Selection Methodology based on two criterion: <em>semantic relevance of dance units</em>, and <em>unit transition stability of the robot</em></p></li>
+                        <li><p>This project aims to implement a real-time music-driven robotic dancer, and we propose to generate improvisational dance sequence with Unit Selection Methodology based on two criteria: semantic relevance of dance units, and unit transition stability of the robot.</p></li>
 
-                        <li><p>To render real-time performance, we apply <em>Madmom</em> for beat tracking and synchronize our dance to the music through a feedback loop with <em>PID</em> control</p></li>
+                        <li><p>To render real-time performance, we apply Madmom for beat tracking and synchronize our dance to the music through a feedback loop with PID control.</p></li>
+
+                        <li><p><a href="project-auto_arrangement" class="text-white bg-dark">Demo Page</a>, <a href="https://github.com/zhaojw1998/Real-Time-Music-Driven-Dancing-Robot" class="text-white bg-dark">Github Page</a></p></li>
                     </ul>
                 </ul>
             </div>
@@ -200,7 +204,7 @@
 
         <div class="row">
             <blockquote class="h4 text-left">
-                <a href="https://github.com/zhaojw1998/SoundtrackClassification">Video Action Recognition via Visual and Auditory Clues</a>
+                <a href="https://github.com/zhaojw1998/SoundtrackClassification">Video Action Recognition via Cross-Modality Learning</a>
             </blockquote>
             <div class="col-sm-4">
                 <a href="https://github.com/zhaojw1998/SoundtrackClassification" class="portfolio-box">
@@ -221,8 +225,9 @@
             <div class="col-sm-8">
                 <ul class="list-inline">
                     <ul class='text-justify'>
-                        <li><p>Video Action Recognition is a popular computer vision task usually conducted exclusively on the image stream of the video. This project aims to explore the soundtrack and fuse the visual and auditory information for better recognition accuracy</p></li>
-                        <li><p>To reveal the inter-dependency between visual scene and sound in the video, we apply <em>scaled dot-product attention</em> as an early fusion methodology.
+                        <li><p>Video Action Recognition is a popular computer vision task usually conducted exclusively on the image stream of the video. This project aims to explore the soundtrack and fuse the visual and auditory information for better recognition accuracy.</p></li>
+                        <li><p>By training classification model with mel-spectrogram inputs, and through late fusion with the vision-based model prediction, we acquire a gain of 1.5% in recognition accuracy.
+                        <li><p><a href="https://github.com/zhaojw1998/SoundtrackClassification" class="text-white bg-dark">Github Page</a></p></li>
                     </ul>
                 </ul>     
             </div>
@@ -253,8 +258,9 @@
             <div class="col-sm-8">
                 <ul class="list-inline">
                     <ul class='text-justify'>
-                        <li><p>For the large-scale electricity generator set, tightness of the <em>slot wedge</em> (part of the generator) is critical to its functioning, but hard to directly detect. Hence we propose a method through tapping at the wedge wall and analyzing the sound frequency.</p></li>
-                        <li><p>By feeding the <em>MFCC</em> and <em>log-energy</em> of the waveform to a <em>KNN</em> classifier we gained an detection accuracy of 99.45% on the test set.
+                        <li><p>For the large-scale electricity generator set, tightness of the slot wedge (part of the generator) is critical to its functioning, but hard to directly detect. We propose a method through tapping at the wedge wall and analyzing the sound frequency to predict tightness.</p></li>
+                        <li><p>By feeding the MFCC and log-energy of the waveform to a KNN classifier we gained an detection accuracy of 99.45% on the test set.
+                            <li><p><a href="https://github.com/zhaojw1998/Sound-Frequency-Analysis" class="text-white bg-dark">Github Page</a></p></li>
                     </ul>
                 </ul>     
             </div>
@@ -275,7 +281,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <p>Liu, Chenzhengyi, <b><em>Jingwei Zhao (Co-First)</em></b>, Guohang Liu, Yuanning Gao, and Xiaofeng Gao*. "D2EA: Depict the Epidemic Picture of COVID-19." Journal of Shanghai Jiaotong University (Science) 25 (2020): 165-176.</p>
+            <p>Chenzhengyi Liu, <b><em>Jingwei Zhao (Co-First)</em></b>, Guohang Liu, Yuanning Gao, and Xiaofeng Gao*. "D2EA: Depict the Epidemic Picture of COVID-19." Journal of Shanghai Jiaotong University (Science) 25 (2020): 165-176.</p>
         </div>
     </div>
 </section>
@@ -400,6 +406,12 @@
             </a>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
+            <a href="https://www.instagram.com/zhaojw1998/">
+            <i class="fa fa-instagram fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p>My Ins</p>
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center">
             <a href="#contact">
                 <i class="fa fa-skype fa-3x wow bounceIn" data-wow-delay=".1s"></i>
                 <p>live:zhaojw1998</p>
@@ -407,15 +419,9 @@
             
         </div>
         <div class="col-lg-3 col-md-6 text-center">
-            <a href="https://www.instagram.com/zhaojw1998/">
-            <i class="fa fa-instagram fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p>My Ins</p>
-            </a>
-        </div>
-        <div class="col-lg-3 col-md-6 text-center">
-            <a href="https://twitter.com/VictorSCullen">
-            <i class="fa fa-twitter fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p>@VictorSCullen</p>
+            <a href="#contact">
+            <i class="fa fa-wechat fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                <p>zjw-1430253126</p>
             </a>
         </div>
     </div>
